@@ -10,7 +10,7 @@
     <!--List<User> selectAll();-->
     <select id="selectAll" resultType="User">
         SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
-        FROM `user`
+        FROM `user` WHERE deleted=1
     </select>
     <!--void deleteById(Integer id);-->
     <select id="selectById" resultType="User">
@@ -20,8 +20,14 @@
     </select>
 
     <!--void deleteById(Integer id);-->
+    <!--真实删除-->
+    <!--<delete id="deleteById" parameterType="Integer">-->
+    <!--    DELETE FROM user WHERE id=#{id}-->
+    <!--</delete>-->
+    <!--逻辑删除-->
     <delete id="deleteById" parameterType="Integer">
-        DELETE FROM user WHERE id=#{id}
+        UPDATE user SET deleted=0
+        WHERE id=#{id}
     </delete>
 
     <!--void add(User user);-->
