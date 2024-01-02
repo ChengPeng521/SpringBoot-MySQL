@@ -19,35 +19,38 @@ public class UserController {
     private IUserService userService;
 
     @RequestMapping("/toLogin")
-    public String toLogin(){
+    public String toLogin() {
         return "user_login";
     }
 
     @RequestMapping("/login")
     @ResponseBody
-    public Result login(String name, String password, String code,HttpSession session){
+    public Result login(String name, String password, String code, HttpSession session) {
         // 先验证验证码对不对，验证码正确再验证用户密码是否正确
         // 验证码不对，直接返回错误，后面不需要执行
         String codeInSession = (String) session.getAttribute("codeInSession");
 
-        if(!codeInSession.equalsIgnoreCase(code)){
+        if (!codeInSession.equalsIgnoreCase(code)) {
             return Result.error("验证码错误!");
         }
 
-
         // 根据name和password查询用户
-        User user = userService.login(name,password);
-        if(user != null){
+        User user = userService.login(name, password);
+        if (user != null) {
+            // 先查询用户状态，看是否禁用
+            if (user.getStatus() == 0) {
+                return Result.error("该用户已禁用!");
+            }
             // 如果有则登录成功，跳转页面
             // 将用户的登录凭证放到Session，Session可以理解为当前用户的回话
             // 一个用户对应一个Session
-            session.setAttribute("user",user);
+            session.setAttribute("user", user);
             //Result result = new Result();
             //result.setCode(0);
             //result.setMsg("登录成功");
             //return result;
             return Result.ok("登录成功");
-        }else{
+        } else {
             // 没有则登录失败，返回登录页面
             return Result.error("用户名或密码错误");
         }
@@ -72,14 +75,14 @@ public class UserController {
     //}
 
     @RequestMapping("/logout")
-    public String logout(HttpSession session){
+    public String logout(HttpSession session) {
         // 销毁所有session
         session.invalidate();
         return "redirect:/user/toLogin";
     }
 
     @RequestMapping("/update")
-    public String update(User user){
+    public String update(User user) {
         userService.update(user);
         // 更新之后，应该查找展示最新数据
         // redirect重定向: 告诉浏览器发送请求/user/selectAll
@@ -87,20 +90,20 @@ public class UserController {
     }
 
     @RequestMapping("/toAdd")
-    public String toAdd(){
+    public String toAdd() {
         return "user_add";
     }
 
     @RequestMapping("/toUpdate")
-    public String toUpdate(Integer id,Model model){
+    public String toUpdate(Integer id, Model model) {
         User user = userService.selectById(id);
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user_update";
     }
 
 
     @RequestMapping("/add")
-    public String add(User user){
+    public String add(User user) {
         userService.add(user);
         // 添加之后，应该查找展示最新数据
         // redirect重定向: 告诉浏览器发送请求/user/selectAll
@@ -118,6 +121,7 @@ public class UserController {
         //转发到user_list界面展示
         return "user_list";
     }
+
     // @ResponseBody 返回json格式数据
     // json集合表示: [{},{}]
     // json对象：{'id',1,'name':'zhangsan'}
@@ -131,9 +135,10 @@ public class UserController {
 
         return list;
     }
+
     // user/deleteById?id=16
     @RequestMapping("/deleteById")
-    public String deleteById(Integer id){
+    public String deleteById(Integer id) {
         userService.deleteById(id);
         // 删除之后，应该查找展示最新数据
         // redirect重定向: 告诉浏览器发送请求/user/selectAll

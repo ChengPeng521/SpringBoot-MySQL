@@ -35,13 +35,13 @@
 
     <!--void update(User user);-->
     <update id="update" parameterType="User">
-        UPDATE user SET name=#{name}, password=#{password}, role=#{role}, nick_name=#{nickName}, email=#{email}, phone=#{phone} ,image=#{image}
+        UPDATE user SET name=#{name}, password=#{password}, role=#{role}, nick_name=#{nickName}, email=#{email}, phone=#{phone} ,image=#{image},status=#{status}
         WHERE id=#{id}
     </update>
     <!--User login(String name, String password);-->
     <select id="login" resultType="User">
         SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
         FROM `user`
-        WHERE name=#{name} AND password=#{password}
+        WHERE name=#{name} AND password=#{password} AND deleted=1
     </select>
 </mapper>
