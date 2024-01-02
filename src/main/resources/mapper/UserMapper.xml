@@ -8,12 +8,12 @@
     <!--List<User> selectAll();-->
     <select id="selectAll" resultType="User">
         SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
-        FROM `user` WHERE deleted=1
+        FROM user WHERE deleted=1
     </select>
     <!--void deleteById(Integer id);-->
     <select id="selectById" resultType="User">
         SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
-        FROM `user`
+        FROM user
         WHERE id=#{id}
     </select>
 
