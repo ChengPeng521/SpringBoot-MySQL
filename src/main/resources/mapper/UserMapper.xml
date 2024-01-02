@@ -5,7 +5,6 @@
 
 <mapper namespace="com.cp.mapper.UserMapper">
 
-
     <!--List<User> selectAll();-->
     <select id="selectAll" resultType="User">
         SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
