@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cp.mapper.UserMapper">
+
+
+
+    <!--List<User> selectAll();-->
+    <select id="selectAll" resultType="User">
+        SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
+        FROM `user`
+    </select>
+    <!--void deleteById(Integer id);-->
+    <select id="selectById" resultType="User">
+        SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
+        FROM `user`
+        WHERE id=#{id}
+    </select>
+
+    <!--void deleteById(Integer id);-->
+    <delete id="deleteById" parameterType="Integer">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+
+    <!--void add(User user);-->
+    <insert id="add" parameterType="User">
+        INSERT INTO user (`name`,`password`,role,nick_name,email,phone,image)
+        VALUES (#{name},#{password},#{role},#{nickName},#{email},#{phone},#{image})
+    </insert>
+
+    <!--void update(User user);-->
+    <update id="update" parameterType="User">
+        UPDATE user SET name=#{name}, password=#{password}, role=#{role}, nick_name=#{nickName}, email=#{email}, phone=#{phone} ,image=#{image}
+        WHERE id=#{id}
+    </update>
+    <!--User login(String name, String password);-->
+    <select id="login" resultType="User">
+        SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
+        FROM `user`
+        WHERE name=#{name} AND password=#{password}
+    </select>
+</mapper>
