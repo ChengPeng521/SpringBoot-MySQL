@@ -16,7 +16,6 @@
         FROM user
         WHERE id=#{id}
     </select>
-
     <!--void deleteById(Integer id);-->
     <!--真实删除-->
     <!--<delete id="deleteById" parameterType="Integer">-->
