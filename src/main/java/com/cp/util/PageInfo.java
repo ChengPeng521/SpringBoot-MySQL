@@ -1,7 +1,6 @@
 package com.cp.util;
 
 
-import com.cp.pojo.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,9 +13,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PageInfo {
+public class PageInfo<T> {
     // 当前数据集合
-    private List<User> list;
+    private List<T> list;
     // 一共多少页
     private Integer totalPage;
     // 当前是第几页
