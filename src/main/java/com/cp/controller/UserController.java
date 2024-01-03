@@ -158,4 +158,10 @@ public class UserController {
         // redirect重定向: 告诉浏览器发送请求/user/selectAll
         return "redirect:/user/selectByPage";
     }
+
+    @RequestMapping("/deleteAll")
+    public String deleteAll(Integer [] ids){
+        userService.deleteAll(ids);
+        return "redirect:/user/selectByPage";
+    }
 }

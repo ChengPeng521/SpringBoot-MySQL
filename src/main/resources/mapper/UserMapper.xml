@@ -22,10 +22,19 @@
     <!--    DELETE FROM user WHERE id=#{id}-->
     <!--</delete>-->
     <!--逻辑删除-->
-    <delete id="deleteById" parameterType="Integer">
+    <update id="deleteById" parameterType="Integer">
         UPDATE user SET deleted=0
         WHERE id=#{id}
-    </delete>
+    </update>
+
+    <!--void deleteAll(Integer[] ids);-->
+    <update id="deleteAll">
+        UPDATE user SET deleted=0
+        WHERE id IN
+        <foreach collection="array" open="(" item="id" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
 
     <!--void add(User user);-->
     <insert id="add" parameterType="User">

@@ -12,9 +12,11 @@
     </style>
 </head>
 <body class="center">
-    <a class="btn btn-primary "th:href="|/user/toAdd|">添加</a>
+    <a class="btn btn-sm btn-primary "th:href="|/user/toAdd|">添加</a>
+    <a class="btn btn-sm btn-danger "onclick="deleteAll()">批量删除</a>
     <table class="table table-striped table-bordered table-hover table-condensed">
         <tr>
+            <td><input type="checkbox" id="checkAll"/></td>
             <td>ID</td>
             <td>名字</td>
             <td>密码</td>
@@ -27,6 +29,7 @@
             <td>编辑</td>
         </tr>
         <tr th:each="user:${pageInfo.list}">
+            <td><input type="checkbox" th:value="${user.id}" class="cb"/></td>
             <td th:text="${user.id}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.password}"></td>
@@ -103,6 +106,55 @@
     </nav>
 
     <script>
+
+        // $(function (){// 页面加载完之后执行function里代码
+        //     $('#checkAll').click(function(){
+        //         $('.cb').prop('checked', this.checked);
+        //     });
+        // });
+        $(function () {
+            // 当页面加载完成后执行以下代码
+
+            // 全选按钮点击事件
+            $('#checkAll').click(function () {
+                // 将所有具有类名 'cb' 的复选框的 'checked' 属性设置为与全选按钮相同的值
+                $('.cb').prop('checked', this.checked);
+            });
+
+            // 单个复选框点击事件
+            $('.cb').click(function () {
+                // 如果某个复选框被取消选中
+                if (!$(this).prop('checked')) {
+                    // 取消选中全选按钮
+                    $('#checkAll').prop('checked', false);
+                } else {
+                    // 如果所有的 .cb 复选框都被手动选中
+                    if ($('.cb:checked').length === $('.cb').length) {
+                        // 选中全选按钮
+                        $('#checkAll').prop('checked', true);
+                    }
+                }
+            });
+        });
+
+
+
+
+        function deleteAll(id) {
+            layer.confirm('确认删除吗?',function() {
+                let array=new Array();
+                // $('.cb:checked')找到了加class='cb',而且checked(已经勾选状态的)
+                $('.cb:checked').each(function(){
+                    // 遍历每个勾选的checkbox，拿到里面的value值，放到array数组
+                    array.push($(this).val());
+                })
+                console.log(array);
+
+
+                location.href = '/user/deleteAll?ids=' + array;
+            });
+        }
+
         function deleteById(id) {
             layer.confirm('确认删除吗?',function() {
                 location.href = '/user/deleteById?id=' + id;
