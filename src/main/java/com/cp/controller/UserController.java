@@ -1,6 +1,6 @@
 package com.cp.controller;
 
-import com.cp.pojo.User;
+import com.cp.pojo.entity.User;
 import com.cp.service.IUserService;
 import com.cp.util.PageInfo;
 import com.cp.util.Result;

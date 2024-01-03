@@ -1,6 +1,6 @@
 package com.cp.service;
 
-import com.cp.pojo.User;
+import com.cp.pojo.entity.User;
 import com.cp.util.PageInfo;
 
 import java.util.List;

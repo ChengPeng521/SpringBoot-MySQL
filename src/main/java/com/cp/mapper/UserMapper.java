@@ -1,6 +1,6 @@
 package com.cp.mapper;
 
-import com.cp.pojo.User;
+import com.cp.pojo.entity.User;
 
 import java.util.List;
 
