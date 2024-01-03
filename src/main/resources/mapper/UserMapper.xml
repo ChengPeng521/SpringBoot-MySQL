@@ -50,12 +50,13 @@
     <select id="selectByPage" resultType="User">
         SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
         FROM `user`
+        WHERE deleted=1
         LIMIT #{offset},#{pageSize}
     </select>
 
 
     <!--int selectTotalCount();-->
     <select id="selectTotalCount" resultType="Integer">
-        SELECT COUNT(*) FROM user
+        SELECT COUNT(*) FROM user WHERE deleted = 1
     </select>
 </mapper>

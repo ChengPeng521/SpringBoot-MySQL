@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
@@ -87,7 +88,7 @@ public class UserController {
         userService.update(user);
         // 更新之后，应该查找展示最新数据
         // redirect重定向: 告诉浏览器发送请求/user/selectAll
-        return "redirect:/user/selectAll ";
+        return "redirect:/user/selectByPage";
     }
 
     @RequestMapping("/toAdd")
@@ -108,13 +109,14 @@ public class UserController {
         userService.add(user);
         // 添加之后，应该查找展示最新数据
         // redirect重定向: 告诉浏览器发送请求/user/selectAll
-        return "redirect:/user/selectAll ";
+        return "redirect:/user/selectByPage";
     }
 
     @RequestMapping("/selectByPage")
-    public String selectByPage(Integer pageNo,Integer pageSize,Model model) {
+    public String selectByPage(@RequestParam(defaultValue = "1") Integer pageNo,
+                               @RequestParam(defaultValue = "5") Integer pageSize, Model model) {
         // soutm
-        System.out.println("UserController.selectAll");
+        System.out.println("UserController.selectByPage");
         PageInfo pageInfo = userService.selectByPage(pageNo,pageSize);
 
         //把list数据放到内存里面
@@ -154,6 +156,6 @@ public class UserController {
         userService.deleteById(id);
         // 删除之后，应该查找展示最新数据
         // redirect重定向: 告诉浏览器发送请求/user/selectAll
-        return "redirect:/user/selectAll ";
+        return "redirect:/user/selectByPage";
     }
 }
