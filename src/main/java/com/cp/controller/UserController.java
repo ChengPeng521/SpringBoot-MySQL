@@ -2,6 +2,7 @@ package com.cp.controller;
 
 import com.cp.pojo.User;
 import com.cp.service.IUserService;
+import com.cp.util.PageInfo;
 import com.cp.util.Result;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -110,6 +111,17 @@ public class UserController {
         return "redirect:/user/selectAll ";
     }
 
+    @RequestMapping("/selectByPage")
+    public String selectByPage(Integer pageNo,Integer pageSize,Model model) {
+        // soutm
+        System.out.println("UserController.selectAll");
+        PageInfo pageInfo = userService.selectByPage(pageNo,pageSize);
+
+        //把list数据放到内存里面
+        model.addAttribute("pageInfo", pageInfo);
+        //转发到user_list界面展示
+        return "user_list";
+    }
     @RequestMapping("/selectAll")
     public String selectAll(Model model) {
         // soutm

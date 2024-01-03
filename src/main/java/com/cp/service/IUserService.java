@@ -1,6 +1,7 @@
 package com.cp.service;
 
 import com.cp.pojo.User;
+import com.cp.util.PageInfo;
 
 import java.util.List;
 
@@ -16,4 +17,6 @@ public interface IUserService {
     void update(User user);
 
     User login(String name, String password);
+
+    PageInfo selectByPage(Integer pageNo, Integer pageSize);
 }

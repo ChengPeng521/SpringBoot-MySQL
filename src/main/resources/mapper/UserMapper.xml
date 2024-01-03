@@ -44,4 +44,18 @@
         FROM `user`
         WHERE name=#{name} AND password=#{password} AND deleted=1
     </select>
+
+
+    <!--List<User> selectByPage(int offset, Integer pageSize);-->
+    <select id="selectByPage" resultType="User">
+        SELECT id,`name`,`password`,role,nick_name,email,phone,image,`status`,deleted,gmt_create,gmt_modified
+        FROM `user`
+        LIMIT #{offset},#{pageSize}
+    </select>
+
+
+    <!--int selectTotalCount();-->
+    <select id="selectTotalCount" resultType="Integer">
+        SELECT COUNT(*) FROM user
+    </select>
 </mapper>

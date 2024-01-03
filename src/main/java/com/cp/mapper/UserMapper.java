@@ -18,4 +18,8 @@ public interface UserMapper {
 
 
     User login(String name, String password);
+
+    List<User> selectByPage(int offset, Integer pageSize);
+
+    int selectTotalCount();
 }

@@ -3,6 +3,7 @@ package com.cp.service.impl;
 import com.cp.mapper.UserMapper;
 import com.cp.pojo.User;
 import com.cp.service.IUserService;
+import com.cp.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,23 @@ public class UserServiceImpl implements IUserService {
     @Override
     public User login(String name, String password) {
         return userMapper.login(name, password);
+    }
+
+
+    // TotalCount=101
+    // pageSize=10
+
+    @Override
+    public PageInfo selectByPage(Integer pageNo, Integer pageSize) {
+        // limit
+        int offset = (pageNo - 1) * pageSize;
+        // 查询当前页数据
+        List<User> list = userMapper.selectByPage(offset,pageSize);
+        // 查找总的数据，目的是计算总的页数totalPage
+        int totalCount = userMapper.selectTotalCount();
+        //Math.ceil向上取整
+        int totalPage =(int)Math.ceil((double) totalCount / pageSize);
+        return new PageInfo(list,totalPage,pageNo,pageSize);
     }
 
 
