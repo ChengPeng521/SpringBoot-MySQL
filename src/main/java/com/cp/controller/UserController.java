@@ -114,7 +114,7 @@ public class UserController {
 
     @RequestMapping("/selectByPage")
     public String selectByPage(@RequestParam(defaultValue = "1") Integer pageNo,
-                               @RequestParam(defaultValue = "5") Integer pageSize, Model model) {
+                               @RequestParam(defaultValue = "10") Integer pageSize, Model model) {
         // soutm
         System.out.println("UserController.selectByPage");
         PageInfo pageInfo = userService.selectByPage(pageNo,pageSize);
