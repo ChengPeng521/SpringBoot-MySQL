@@ -12,11 +12,11 @@ public interface BlogTypeMapper {
 
     void deleteById(Integer id);
 
-    void add(BlogType blog);
+    void add(BlogType bolgType);
 
     BlogType selectById(Integer id);
 
-    void update(BlogType blog);
+    void update(BlogType bolgType);
 
     List<BlogType> selectByPage(int offset, Integer pageSize);
 
