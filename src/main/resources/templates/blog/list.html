@@ -35,6 +35,7 @@
             <td>点击数量</td>
             <td>头像</td>
             <td>状态</td>
+            <td>更新时间</td>
             <td>操作</td>
         </tr>
         <tr th:each="blog:${pageInfo.list}">
@@ -48,6 +49,7 @@
                 <span class="label label-warning" th:if="${blog.status==0}">禁用</span>
                 <span class="label label-success" th:if="${blog.status==1}">正常</span>
             </td>
+            <td th:text="${#dates.format(blog.gmtModified,'yyyy-MM-dd hh:mm')}"></td>
             <!--<td><a class="btn btn-danger" th:href="|/blog/deleteById?id=${blog.id}|">删除</a></td>-->
             <td>
                 <a class="btn btn-success" th:onclick="showBlogContent([[${blog.content}]])">博客详情</a>

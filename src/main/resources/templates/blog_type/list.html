@@ -31,12 +31,14 @@
             <td><input type="checkbox" id="checkAll"/></td>
             <td>ID</td>
             <td>博客分类名</td>
+            <td>更新时间</td>
             <td>操作</td>
         </tr>
         <tr th:each="blogType:${pageInfo.list}">
             <td><input type="checkbox" th:value="${blogType.id}" class="cb"/></td>
             <td th:text="${blogType.id}"></td>
             <td th:text="${blogType.name}"></td>
+            <td th:text="${#dates.format(blogType.gmtModified,'yyyy-MM-dd hh:mm')}"></td>
             <!--<td><a class="btn btn-danger" th:href="|/blogType/deleteById?id=${blogType.id}|">删除</a></td>-->
             <td>
                 <a class="btn btn-danger" th:onclick="|deleteById(${blogType.id})|">删除</a>
