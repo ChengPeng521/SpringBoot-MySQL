@@ -50,6 +50,7 @@
             </td>
             <!--<td><a class="btn btn-danger" th:href="|/blog/deleteById?id=${blog.id}|">删除</a></td>-->
             <td>
+                <a class="btn btn-success" th:onclick="showBlogContent([[${blog.content}]])">博客详情</a>
                 <a class="btn btn-danger" th:onclick="|deleteById(${blog.id})|">删除</a>
                 <a class="btn btn-primary" th:href="|/blog/toUpdate?id=${blog.id}|">编辑</a>
             </td>
@@ -142,6 +143,14 @@
             });
         });
 
+
+        function showBlogContent(content) {
+            layer.open({
+                type:1,
+                area:['1000px','450px'],
+                content:content
+            })
+        }
 
 
 
