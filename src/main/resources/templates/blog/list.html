@@ -32,29 +32,31 @@
             <td>ID</td>
             <td>标题</td>
             <td>分类</td>
+            <td>分类名</td>
             <td>点击数量</td>
             <td>头像</td>
             <td>状态</td>
             <td>更新时间</td>
             <td>操作</td>
         </tr>
-        <tr th:each="blog:${pageInfo.list}">
-            <td><input type="checkbox" th:value="${blog.id}" class="cb"/></td>
-            <td th:text="${blog.id}"></td>
-            <td th:text="${blog.title}"></td>
-            <td th:text="${blog.typeId}"></td>
-            <td th:text="${blog.clickCount}"></td>
-            <td><img th:src="|/pic/${blog.image}|" width="40px" height="40px"></td>
+        <tr th:each="blogVo:${pageInfo.list}">
+            <td><input type="checkbox" th:value="${blogVo.id}" class="cb"/></td>
+            <td th:text="${blogVo.id}"></td>
+            <td th:text="${blogVo.title}"></td>
+            <td th:text="${blogVo.typeId}"></td>
+            <td th:text="${blogVo.typeName}"></td>
+            <td th:text="${blogVo.clickCount}"></td>
+            <td><img th:src="|/pic/${blogVo.image}|" width="40px" height="40px"></td>
             <td>
-                <span class="label label-warning" th:if="${blog.status==0}">禁用</span>
-                <span class="label label-success" th:if="${blog.status==1}">正常</span>
+                <span class="label label-warning" th:if="${blogVo.status==0}">禁用</span>
+                <span class="label label-success" th:if="${blogVo.status==1}">正常</span>
             </td>
-            <td th:text="${#dates.format(blog.gmtModified,'yyyy-MM-dd hh:mm')}"></td>
+            <td th:text="${#dates.format(blogVo.gmtModified,'yyyy-MM-dd hh:mm')}"></td>
             <!--<td><a class="btn btn-danger" th:href="|/blog/deleteById?id=${blog.id}|">删除</a></td>-->
             <td>
-                <a class="btn btn-success" th:onclick="showBlogContent([[${blog.content}]])">博客详情</a>
-                <a class="btn btn-danger" th:onclick="|deleteById(${blog.id})|">删除</a>
-                <a class="btn btn-primary" th:href="|/blog/toUpdate?id=${blog.id}|">编辑</a>
+                <a class="btn btn-success" th:onclick="showBlogContent([[${blogVo.content}]])">博客详情</a>
+                <a class="btn btn-danger" th:onclick="|deleteById(${blogVo.id})|">删除</a>
+                <a class="btn btn-primary" th:href="|/blog/toUpdate?id=${blogVo.id}|">编辑</a>
             </td>
         </tr>
 

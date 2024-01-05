@@ -22,10 +22,9 @@
         <div class="form-group">
             <label>博客分类</label>
             <select class="form-control" name="typeId">
-                <option value="1">Java</option>
-                <option value="2">UI</option>
-                <option value="3">H5</option>
-                <option value="4">C++</option>
+                <th:block th:each="blogType:${list}">
+                    <option th:value="${blogType.id}" th:text="${blogType.name}">Java</option>
+                </th:block>
             </select>
         </div>
 

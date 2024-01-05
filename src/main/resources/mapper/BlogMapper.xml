@@ -50,10 +50,11 @@
 
 
     <!--List<Blog> selectByPage(int offset, Integer pageSize);-->
-    <select id="selectByPage" resultType="Blog">
-        SELECT id,title,image,click_count,content,type_id,`status`,deleted,gmt_create,gmt_modified
-        FROM `blog`
-        WHERE deleted=1
+    <select id="selectByPage" resultType="BlogVo">
+        SELECT b.id,b.title,b.image,b.click_count,b.content,b.type_id,bt.name AS type_name, b.`status`,b.deleted,b.gmt_create,b.gmt_modified
+        FROM blog AS b INNER JOIN blog_type AS bt
+        ON b.type_id=bt.id
+        WHERE b.deleted=1 AND bt.deleted=1
         LIMIT #{offset},#{pageSize}
     </select>
 

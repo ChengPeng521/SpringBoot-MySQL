@@ -1,7 +1,9 @@
 package com.cp.controller;
 
 import com.cp.pojo.entity.Blog;
+import com.cp.pojo.entity.BlogType;
 import com.cp.service.IBlogService;
+import com.cp.service.IBlogTypeService;
 import com.cp.util.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,8 @@ import java.util.List;
 public class BlogController {
     @Autowired
     private IBlogService blogService;
-
+    @Autowired
+    private IBlogTypeService blogTypeService;
 
     @RequestMapping("/update")
     public String update(Blog blog) {
@@ -28,7 +31,9 @@ public class BlogController {
     }
 
     @RequestMapping("/toAdd")
-    public String toAdd() {
+    public String toAdd(Model model) {
+        List<BlogType> list = blogTypeService.selectAll();
+        model.addAttribute("list",list);
         return "/blog/add";
     }
 
@@ -36,6 +41,8 @@ public class BlogController {
     public String toUpdate(Integer id, Model model) {
         Blog blog = blogService.selectById(id);
         model.addAttribute("blog", blog);
+        List<BlogType> list = blogTypeService.selectAll();
+        model.addAttribute("list",list);
         return "/blog/update";
     }
 

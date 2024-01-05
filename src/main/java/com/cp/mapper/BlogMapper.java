@@ -1,6 +1,7 @@
 package com.cp.mapper;
 
 import com.cp.pojo.entity.Blog;
+import com.cp.pojo.vo.BlogVo;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public interface BlogMapper {
 
     void update(Blog blog);
 
-    List<Blog> selectByPage(int offset, Integer pageSize);
+    List<BlogVo> selectByPage(int offset, Integer pageSize);
 
     int selectTotalCount();
 
