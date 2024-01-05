@@ -51,7 +51,8 @@ public class UserController {
             //result.setCode(0);
             //result.setMsg("登录成功");
             //return result;
-            return Result.ok("登录成功");
+            return Result.ok("登录成功",user);
+            //return Result.ok("登录成功");
         } else {
             // 没有则登录失败，返回登录页面
             return Result.error("用户名或密码错误");

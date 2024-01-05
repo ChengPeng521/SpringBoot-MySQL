@@ -137,7 +137,20 @@
                     // );
                     // mylayer.okMsg(result.msg); //无提示弹窗
                     // location.href = '/';
+
+
+                    // 进行权限判断，根据用户类型跳转不同页面
+                    // let user=result.data;
+                    // if(user.role == 1){
+                    //     mylayer.okUrl(result.msg,'/indexAdmin');
+                    // }else if(user.role==2){
+                    //     mylayer.okUrl(result.msg,'/indexNormal');
+                    // }
+
+
+                    // 默认跳转index.html
                     mylayer.okUrl(result.msg,'/');
+
                 } else {
                     // layer.msg(
                     //     result.msg,
