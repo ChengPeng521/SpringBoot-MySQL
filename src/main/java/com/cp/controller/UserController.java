@@ -93,14 +93,14 @@ public class UserController {
 
     @RequestMapping("/toAdd")
     public String toAdd() {
-        return "/user/user_add";
+        return "/user/add";
     }
 
     @RequestMapping("/toUpdate")
     public String toUpdate(Integer id, Model model) {
         User user = userService.selectById(id);
         model.addAttribute("user", user);
-        return "/user/user_update";
+        return "/user/update";
     }
 
 
@@ -122,7 +122,7 @@ public class UserController {
         //把list数据放到内存里面
         model.addAttribute("pageInfo", pageInfo);
         //转发到user_list界面展示
-        return "/user/user_list";
+        return "/user/list";
     }
     @RequestMapping("/selectAll")
     public String selectAll(Model model) {
@@ -133,7 +133,7 @@ public class UserController {
         //把list数据放到内存里面
         model.addAttribute("list", list);
         //转发到user_list界面展示
-        return "/user/user_list";
+        return "/user/list";
     }
 
     // @ResponseBody 返回json格式数据
