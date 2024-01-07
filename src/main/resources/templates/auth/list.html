@@ -33,6 +33,7 @@
             <td>权限名</td>
             <td>权限路径</td>
             <td>角色</td>
+            <td>状态</td>
             <td>更新时间</td>
             <td>操作</td>
         </tr>
@@ -44,6 +45,10 @@
             <td>
                 <span class="label label-warning" th:if="${auth.role==1}">超级管理员</span>
                 <span class="label label-success" th:if="${auth.role==2}">普通管理员</span>
+            </td>
+            <td>
+                <span class="label label-warning" th:if="${auth.status==0}">禁用</span>
+                <span class="label label-success" th:if="${auth.status==1}">正常</span>
             </td>
             <td th:text="${#dates.format(auth.gmtModified,'yyyy-MM-dd hh:mm')}"></td>
             <!--<td><a class="btn btn-danger" th:href="|/auth/deleteById?id=${auth.id}|">删除</a></td>-->

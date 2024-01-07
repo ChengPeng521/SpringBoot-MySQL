@@ -23,7 +23,7 @@
             <label>博客分类</label>
             <select class="form-control" name="typeId">
                 <th:block th:each="blogType:${list}">
-                    <option th:value="${blogType.id}" th:text="${blogType.name}">Java</option>
+                    <option th:selected="${blogType.id==blog.typeId}" th:value="${blogType.id}" th:text="${blogType.name}">Java</option>
                 </th:block>
             </select>
         </div>

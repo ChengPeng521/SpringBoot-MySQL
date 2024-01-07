@@ -7,12 +7,12 @@
 
     <!--List<Auth> selectAll();-->
     <select id="selectAll" resultType="Auth">
-        SELECT id,name,path,role,deleted,gmt_create,gmt_modified
+        SELECT id,name,path,role,status,deleted,gmt_create,gmt_modified
         FROM auth WHERE deleted=1
     </select>
     <!--void deleteById(Integer id);-->
     <select id="selectById" resultType="Auth">
-        SELECT id,name,path,role,deleted,gmt_create,gmt_modified
+        SELECT id,name,path,role,status,deleted,gmt_create,gmt_modified
         FROM auth
         WHERE id=#{id}
     </select>
@@ -40,20 +40,20 @@
 
     <!--void add(Auth auth);-->
     <insert id="add" parameterType="Auth">
-        INSERT INTO auth (name,path,role)
-        VALUES (#{name},#{path},#{role})
+        INSERT INTO auth (name,path,role,status)
+        VALUES (#{name},#{path},#{role},#{status})
     </insert>
 
     <!--void update(Auth auth);-->
     <update id="update" parameterType="Auth">
-        UPDATE auth SET name=#{name},path=#{path},role=#{role}
+        UPDATE auth SET name=#{name},path=#{path},role=#{role},status=#{status}
         WHERE id=#{id}
     </update>
 
 
     <!--List<Auth> selectByPage(int offset, Integer pageSize);-->
     <select id="selectByPage" resultType="Auth">
-        SELECT id,name,path,role,deleted,gmt_create,gmt_modified
+        SELECT id,name,path,role,status,deleted,gmt_create,gmt_modified
         FROM `auth`
         WHERE deleted=1
         ORDER BY role
@@ -62,9 +62,9 @@
 
     <!--List<Auth> selectByRoleId(Integer id);-->
     <select id="selectByRoleId" resultType="Auth">
-        SELECT id,name,path,role,deleted,gmt_create,gmt_modified
+        SELECT id,name,path,role,status,deleted,gmt_create,gmt_modified
         FROM `auth`
-        WHERE deleted=1 AND role=#{role}
+        WHERE deleted=1 AND role=#{role} AND status=1
     </select>
     <!--int selectTotalCount();-->
     <select id="selectTotalCount" resultType="Integer">

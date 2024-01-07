@@ -15,6 +15,7 @@ public class Auth {
     private String name;
     private String path;
     private Integer role;
+    private Integer status;
     private Integer deleted;
     private Date gmtCreate;
     private Date gmtModified;
